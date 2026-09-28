@@ -27,7 +27,7 @@ const corsOptions = {
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:3000',
-    'https://network-bank-olns-33ad6s5y8-e-kalakaar-s-projects.vercel.app/'
+    'https://network-bank-olns.vercel.app/'
     // Add your deployed frontend URL here
     // 'https://your-frontend-domain.com'
   ],
