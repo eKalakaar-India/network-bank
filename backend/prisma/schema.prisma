@@ -1,0 +1,72 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("USER") // ADMIN, USER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Record {
+  id                         String   @id @default(uuid())
+  srNo                       Int?
+  category                   String   @default("Other") // Govt, Corporate, NGO, Academic, Political, Other
+  nameOfOrganization         String?
+  nameOfAuthorisedPerson     String?
+  designation                String?
+  sector                     String?
+  strengthExpertise          String?
+  contactNumber              String?
+  email                      String?
+  state                      String?
+  districtCity               String?
+  languages                  String?
+  scopeOfCollaboration       String?
+  reliability                String?
+  remarks                    String?
+  isDeleted                  Boolean  @default(false)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+}
+
+model Import {
+  id                    String   @id @default(uuid())
+  fileName              String
+  fileType              String
+  totalRows             Int
+  successfullyImported  Int
+  failedRows            Int
+  duplicateRows         Int
+  status                String   @default("COMPLETED") // COMPLETED, FAILED, PARTIAL
+  logDetails            String?  // JSON string of import diagnostics
+  createdAt             DateTime @default(now())
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  userName  String?
+  action    String
+  details   String
+  createdAt DateTime @default(now())
+}
+
+model ExportLog {
+  id           String   @id @default(uuid())
+  userId       String?
+  userName     String?
+  fileType     String   // CSV, XLSX
+  recordsCount Int
+  filtersUsed  String?
+  createdAt    DateTime @default(now())
+}
