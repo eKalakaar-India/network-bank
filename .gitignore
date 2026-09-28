@@ -29,7 +29,7 @@ yarn-error.log*
 *.log
 
 # Uploaded assets
-/backend/uploads/*
+# /backend/uploads/*
 !/backend/uploads/.gitkeep
 
 # IDEs & System files
