@@ -45,7 +45,18 @@ app.options(/.*/, cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 
 // Ensure upload directory exists
-const uploadDir = path.join(__dirname, '../uploads');
+// const uploadDir = path.join(__dirname, '../uploads');
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
+
+
+const isVercel = process.env.VERCEL === '1';
+
+const uploadDir = isVercel
+  ? path.join('/tmp', 'uploads')
+  : path.join(__dirname, '../uploads');
+
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
